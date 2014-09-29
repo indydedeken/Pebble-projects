@@ -1,0 +1,19 @@
+{
+  "uuid": "4e0fcdb6-cc92-4657-aad5-fce675c498f5",
+  "shortName": "Find Me Starbucks",
+  "longName": "Find Me Starbucks",
+  "companyName": "Tuto",
+  "versionCode": 1,
+  "versionLabel": "1.0",
+  "watchapp": {
+    "watchface": true
+  },
+  "appKeys": {
+    "dummy": 0,
+    "location": 0
+  },
+  "capabilities": ["location"],
+  "resources": {
+    "media": []
+  }
+}
