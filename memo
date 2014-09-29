@@ -1,0 +1,15 @@
+Ajouter pebble au PATH :
+echo 'export PATH=~/pebble-dev/PebbleSDK-2.5/bin:$PATH' >> ~/.bash_profile
+source ~/.bash_profile
+
+Construire le build de l’application :
+pebble build
+
+Installation de l'app sur la montre :
+pebble install –phone 192.168.1.80
+
+Lire les logs dans le terminal. Attention, monopolise le terminal :
+pebble install –logs –phone 192.168.1.80
+
+## Rappel des usages en ligne de commande :
+https://developer.getpebble.com/2/additional/pebble-tool/
