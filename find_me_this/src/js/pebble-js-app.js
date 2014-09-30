@@ -14,7 +14,12 @@ function fetch_location_data(pos) {
         clientSecret = 'LWLNPL4YVE0VYXTBR2ASVENNCUOSYWS4P4OZH3XP35IKK0JY',
         latitude = pos.coords.latitude,
         longitude = pos.coords.longitude;
-    req.open('GET', 'https://api.foursquare.com/v2/venues/search?client_id=' + clientId + '&client_secret=' + clientSecret + '&v=' + version + '&ll=' + latitude + ',' + longitude + '&query=mc%20donald', true);
+        query = 'mc%20donalds';
+    
+    // appel vers l'API foursquare
+    req.open('GET', 'https://api.foursquare.com/v2/venues/search?client_id=' + clientId + '&client_secret=' + clientSecret + '&v=' + version + '&ll=' + latitude + ',' + longitude + '&query=' + query, true);
+    
+    // retour de la requete vers l'API
     req.onload = function(e) {
         if (req.readyState == 4 && req.status == 200) {
             if (req.status == 200) {
@@ -36,7 +41,7 @@ function fetch_location_data(pos) {
 function fetch_location_error(err) {
     console.log(err);
     Pebble.sendAppMessage({
-        location: 'Localisation ind�termin�e'
+        location: 'Localisation indeterminee'
     });
 }
 Pebble.addEventListener('ready', function(e) {

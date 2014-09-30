@@ -44,7 +44,7 @@ char *translate_error(AppMessageResult result) {
 }
 
 void sync_error_callback(DictionaryResult dict_error, AppMessageResult app_message_error, void *context) {
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "... Sync Error: %s", translate_error(app_message_error));
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "... Erreur de synchro : %s", translate_error(app_message_error));
 }
 
 static void handle_second_tick(struct tm* tick_time, TimeUnits units_changed) {
@@ -77,7 +77,7 @@ static void init_location_search(Window *window) {
     GRect bounds = layer_get_bounds(window_layer);
     
     label_layer = text_layer_create((GRect) { .origin = { 0, 90 }, .size = { bounds.size.w, 100 } });
-    text_layer_set_text(label_layer, "Nearest Starbucks:");
+    text_layer_set_text(label_layer, "Le plus proche :");
     text_layer_set_text_color(label_layer, GColorWhite);
     text_layer_set_text_alignment(label_layer, GTextAlignmentCenter);
     text_layer_set_background_color(label_layer, GColorClear);
@@ -85,7 +85,7 @@ static void init_location_search(Window *window) {
     layer_add_child(window_layer, text_layer_get_layer(label_layer));
     
     text_layer = text_layer_create((GRect) { .origin = { 0, 115 }, .size = { bounds.size.w, bounds.size.h } });
-    text_layer_set_text(text_layer, "Loading...");
+    text_layer_set_text(text_layer, "2 sec...");
     text_layer_set_text_color(text_layer, GColorWhite);
     text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
     text_layer_set_background_color(text_layer, GColorClear);
@@ -94,7 +94,7 @@ static void init_location_search(Window *window) {
     layer_add_child(window_layer, text_layer_get_layer(text_layer));
     
     Tuplet initial_values[] = {
-        TupletCString(OUR_LOCATION, "Loading...")
+        TupletCString(OUR_LOCATION, "2 sec...")
         };
     
     app_sync_init(&sync, sync_buffer, sizeof(sync_buffer), initial_values, ARRAY_LENGTH(initial_values),
@@ -133,7 +133,7 @@ static void deinit(void) {
 int main(void) {
     init();
     
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "Done initializing, pushed window: %p", window);
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Ok initialisé, fenêtre : %p", window);
     
     app_event_loop();
     deinit();
