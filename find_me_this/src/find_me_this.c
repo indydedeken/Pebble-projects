@@ -50,7 +50,7 @@ void sync_error_callback(DictionaryResult dict_error, AppMessageResult app_messa
 static void handle_second_tick(struct tm* tick_time, TimeUnits units_changed) {
     static char time_text[] = "00:00";
     
-    strftime(time_text, sizeof(time_text), "%I:%M", tick_time);
+    strftime(time_text, sizeof(time_text), "%H:%M", tick_time);
     text_layer_set_text(time_layer, time_text);
 }
 
@@ -81,7 +81,7 @@ static void init_location_search(Window *window) {
     text_layer_set_text_color(label_layer, GColorWhite);
     text_layer_set_text_alignment(label_layer, GTextAlignmentCenter);
     text_layer_set_background_color(label_layer, GColorClear);
-    text_layer_set_font(label_layer, fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD));
+    text_layer_set_font(label_layer, fonts_get_system_font(FONT_KEY_GOTHIC_14));
     layer_add_child(window_layer, text_layer_get_layer(label_layer));
     
     text_layer = text_layer_create((GRect) { .origin = { 0, 115 }, .size = { bounds.size.w, bounds.size.h } });
@@ -90,12 +90,12 @@ static void init_location_search(Window *window) {
     text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
     text_layer_set_background_color(text_layer, GColorClear);
     text_layer_set_overflow_mode(text_layer, GTextOverflowModeFill);
-    text_layer_set_font(text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_14));
+    text_layer_set_font(text_layer, fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_DOLCE_30)));
     layer_add_child(window_layer, text_layer_get_layer(text_layer));
     
     Tuplet initial_values[] = {
         TupletCString(OUR_LOCATION, "2 sec...")
-        };
+    };
     
     app_sync_init(&sync, sync_buffer, sizeof(sync_buffer), initial_values, ARRAY_LENGTH(initial_values),
                     sync_tuple_changed_callback, sync_error_callback, NULL);
@@ -133,7 +133,7 @@ static void deinit(void) {
 int main(void) {
     init();
     
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "Ok initialisé, fenêtre : %p", window);
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Ok initialise, fenetre : %p", window);
     
     app_event_loop();
     deinit();
